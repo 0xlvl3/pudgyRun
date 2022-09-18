@@ -1,17 +1,12 @@
-export default class GenericObject {
-  constructor({ x, y, image }) {
-    this.position = {
-      x,
-      y,
-    };
+import Sprite from "./Sprite.js";
 
-    this.image = image;
+export default class GenericObject extends Sprite {
+  constructor(position = { x: 0, y: 0 }) {
+    super({ position }, "../img/hills.png");
 
-    this.width = image.width;
-    this.height = image.height;
-  }
+    this.position = position;
 
-  draw() {
-    c.drawImage(this.image, this.position.x, this.position.y);
+    this.width = 100;
+    this.height = 100;
   }
 }

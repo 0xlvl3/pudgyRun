@@ -1,3 +1,5 @@
+import { c } from "../canvas.js";
+
 export default class Sprite {
   constructor(
     position = { x: 0, y: 0 },
@@ -5,8 +7,10 @@ export default class Sprite {
     frames = { max: 1 },
     offset = { x: 0, y: 0 }
   ) {
+    //sprite position
     this.position = position;
 
+    //sprites src
     this.image = new Image();
     this.image.src = imageSrc;
 

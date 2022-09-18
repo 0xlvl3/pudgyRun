@@ -4,26 +4,24 @@ import Platform from "./classes/Platform.js";
 import SmallPlatform from "./classes/SmallPlatform.js";
 import GenericObject from "./classes/GenericObject.js";
 
-const canvas = document.querySelector("canvas");
-const c = canvas.getContext("2d");
+export const canvas = document.querySelector("canvas");
+export const c = canvas.getContext("2d");
 
 //16*9
 canvas.width = 1024;
 canvas.height = 576;
 
-const gravity = 0.5;
-
 const image = new Image();
 image.onload = () => {
   animate();
 };
-image.src = "../img/platform.png";
+image.src = "../img/background.png";
 
-function createImage(imageSrc) {
-  const image = new Image();
-  image.src = imageSrc;
-  return image;
-}
+// function createImage(imageSrc) {
+//   const image = new Image();
+//   image.src = imageSrc;
+//   return image;
+// }
 
 const keys = {
   right: {
@@ -47,19 +45,12 @@ let scrollOffset = 0;
 function init() {
   player = new Player();
 
-  platforms = [
-    new Platform({ x: -1, y: 470 }),
-    new Platform({ x: image.width - 3, y: 470 }),
-    new Platform({ x: image.width * 2 + 200, y: 470 }),
-    new Platform({ x: image.width * 3 + 400, y: 470 }),
-    new Platform({ x: image.width * 4 + 1200, y: 470 }),
-  ];
+  platforms = [new Platform({ x: 0, y: 470 })];
 
   smallPlatforms = [
     new SmallPlatform({
-      x: 2900,
+      x: 400,
       y: 270,
-      image: createImage("../img/platformSmallTall.png"),
     }),
   ];
 
@@ -67,12 +58,6 @@ function init() {
     new GenericObject({
       x: -1,
       y: -1,
-      image: createImage("../img/background.png"),
-    }),
-    new GenericObject({
-      x: -1,
-      y: -1,
-      image: createImage("../img/hills.png"),
     }),
   ];
 
@@ -81,9 +66,12 @@ function init() {
 
 init();
 function animate() {
+  //recursive loop
   requestAnimationFrame(animate);
-  c.fillStyle = "white";
-  c.fillRect(0, 0, canvas.width, canvas.height);
+
+  //   c.fillStyle = "white";
+  //   c.fillRect(0, 0, canvas.width, canvas.height);
+  c.drawImage(image, 0, 0);
 
   genericObjects.forEach((object) => {
     object.draw();
@@ -202,37 +190,39 @@ function animate() {
   });
 }
 
-addEventListener("keydown", ({ keyCode }) => {
-  switch (keyCode) {
-    case 65:
+addEventListener("keydown", ({ key }) => {
+  key.toLowerCase();
+  switch (key) {
+    case "a":
       console.log("left");
       keys.left.pressed = true;
       break;
-    case 83:
+    case "s":
       console.log("down");
       break;
-    case 68:
+    case "d":
       keys.right.pressed = true;
       break;
-    case 87:
+    case "w":
       player.velocity.y -= 25;
       break;
   }
 });
 
-addEventListener("keyup", ({ keyCode }) => {
-  switch (keyCode) {
-    case 65:
+addEventListener("keyup", ({ key }) => {
+  key.toLowerCase();
+  switch (key) {
+    case "a":
       console.log("left");
       keys.left.pressed = false;
       break;
-    case 83:
+    case "s":
       console.log("down");
       break;
-    case 68:
+    case "d":
       keys.right.pressed = false;
       break;
-    case 87:
+    case "w":
       player.velocity.y = 0;
       break;
   }

@@ -1,3 +1,5 @@
+import { c, canvas } from "../canvas.js";
+
 export default class Player {
   constructor() {
     this.position = {
@@ -12,9 +14,9 @@ export default class Player {
     this.width = 30;
     this.height = 30;
 
-    this.speed = 10;
+    this.speed = 5;
 
-    this.gravity = 10;
+    this.gravity = 0.5;
   }
 
   draw() {

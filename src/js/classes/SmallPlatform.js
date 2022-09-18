@@ -1,31 +1,12 @@
-import Sprite from "../classes/Sprite.js";
+import Sprite from "./Sprite.js";
 
 export default class SmallPlatform extends Sprite {
-  constructor() {
-    super(
-      (position = { x: 0, y: 0 }),
-      imageSrc,
-      (frames = { max: 1 }),
-      (offset = { x: 0, y: 0 })
-    );
-    this.position = {
-      x,
-      y,
-    };
+  constructor(position = { x: 0, y: 0 }) {
+    super({ position }, "../img/platformSmallTall.png");
 
-    this.width = image.width;
-    this.height = image.height;
+    this.position = position;
+
+    this.width = 100;
+    this.height = 100;
   }
 }
-
-// export default class Enemy extends Sprite {
-//     constructor({ position = { x: 0, y: 0 } }) {
-//       super(
-//         {
-//           position,
-//         },
-//         "/img/orc.png",
-//         {
-//           max: 7,
-//         }
-//       );
